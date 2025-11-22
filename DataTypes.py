@@ -23,7 +23,6 @@ Contact_details = {
 
 #Set
 Certifications = {"Azure", "AWS", "Azure"}
-Certifications_removed = Certifications.remove("Azure")
 
 #print
 print(Name)
@@ -31,4 +30,4 @@ print(Age)
 print(Skills)
 print(Education)
 print(Contact_details)
-print(Certifications_removed)
+print(Certifications)
