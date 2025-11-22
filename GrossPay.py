@@ -3,48 +3,50 @@ This file is used to calculate the gross pay of a worker in NZ.
 @author: Yaohui Zhang @tomie
 """
 
-# Tax rate dictionary
-# The key is a tuple of the tax bracket
-# The value is the tax rate for net pay pre year
-tax_rate = {
-    (0, 15600): 10.5,
-    (15601, 53500): 17.5,
-    (53501, 78100): 30,
-    (78101, 180000): 33,
-    (180001, float('inf')): 39,
-}
+# Tax rate list
+# Each item is a tuple: (min_income, max_income, tax_rate)
+# Tax brackets are ordered from lowest to highest income
+tax_rate = [
+    (0, 15600, 10.5),
+    (15601, 53500, 17.5),
+    (53501, 78100, 30),
+    (78101, 180000, 33),
+    (180001, float('inf'), 39),
+]
 
-# Function to calculate the gross pay after tax
+# Function to calculate the gross pay (total income before tax)
 # The input is the hours worked and the hourly rate
-# The first step is to calculate the gross pay (Be attention the tax rate is for net pay pre year)
-# Then, we need to calculate the tax amount using progressive tax brackets
+# This function simply multiplies hours worked by hourly rate to get annual gross pay
+def calculate_gross_pay(hours_worked, hourly_rate):
+    # Calculate the gross pay pre year: hours worked × hourly rate
+    # For example: 40 hours/week × 52 weeks × $33/hour = $68,640
+    gross_pay_pre_year = hours_worked * hourly_rate
+    return gross_pay_pre_year
+
+
+# Function to calculate the tax amount based on progressive tax brackets
+# The input is the gross pay (annual income before tax)
 # Progressive tax means different portions of income are taxed at different rates
 # For example: first $15,600 at 10.5%, next portion at 17.5%, and so on
 # We loop through each tax bracket and calculate tax for the portion of income in that bracket
-# Finally, we subtract the total tax from gross pay to get the net pay after tax
-def calculate_gross_pay_after_tax(hours_worked, hourly_rate):
-    # Calculate the gross pay pre year (total income before tax)
-    gross_pay_pre_year = hours_worked * hourly_rate
-    
+# Returns the total tax amount that needs to be paid
+def calculate_tax(gross_pay):
     # Initialize total tax amount and previous threshold for progressive tax calculation
     total_tax = 0.0
     previous_threshold = 0
     
-    # Sort tax brackets by minimum income to process from lowest to highest
-    # This ensures we calculate tax progressively: lower income portions first
-    sorted_brackets = sorted(tax_rate.items(), key=lambda x: x[0][0])
-    
     # Loop through each tax bracket to calculate tax for the portion of income in that bracket
-    for (min_income, max_income), rate in sorted_brackets:
+    # Tax brackets are already ordered from lowest to highest income
+    for min_income, max_income, rate in tax_rate:
         # If all income has been taxed, exit the loop
-        if gross_pay_pre_year <= previous_threshold:
+        if gross_pay <= previous_threshold:
             break
         
         # Calculate the taxable amount in this bracket
         # It's the minimum of: (remaining income) or (income in this bracket)
         # For example: if income is $68,640 and we're in bracket $53,501-$78,100,
         # taxable amount = min($68,640, $78,100) - $53,500 = $15,140
-        taxable_amount = min(gross_pay_pre_year, max_income) - previous_threshold
+        taxable_amount = min(gross_pay, max_income) - previous_threshold
         
         # Only calculate tax if there's taxable income in this bracket
         if taxable_amount > 0:
@@ -56,8 +58,25 @@ def calculate_gross_pay_after_tax(hours_worked, hourly_rate):
         # Update previous threshold to the end of current bracket for next iteration
         previous_threshold = max_income
     
-    # Calculate the net pay after tax: gross pay minus total tax
-    net_pay = gross_pay_pre_year - total_tax
+    # Return the total tax amount
+    return total_tax
+
+
+# Function to calculate the gross pay after tax (net pay)
+# The input is the hours worked and the hourly rate
+# This function combines the two functions above:
+# 1. First calculates gross pay using calculate_gross_pay()
+# 2. Then calculates tax using calculate_tax()
+# 3. Finally subtracts tax from gross pay to get net pay
+def calculate_gross_pay_after_tax(hours_worked, hourly_rate):
+    # Step 1: Calculate the gross pay (total income before tax)
+    gross_pay = calculate_gross_pay(hours_worked, hourly_rate)
+    
+    # Step 2: Calculate the tax amount based on progressive tax brackets
+    total_tax = calculate_tax(gross_pay)
+    
+    # Step 3: Calculate the net pay after tax: gross pay minus total tax
+    net_pay = gross_pay - total_tax
     return net_pay
 
 if __name__ == "__main__":
