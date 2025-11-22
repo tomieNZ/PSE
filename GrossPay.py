@@ -17,25 +17,47 @@ tax_rate = {
 # Function to calculate the gross pay after tax
 # The input is the hours worked and the hourly rate
 # The first step is to calculate the gross pay (Be attention the tax rate is for net pay pre year)
-# Then, we need to calculate the tax amount based on the tax rate and the gross pay pre year
-# we loop through the tax rate dictionary to find the current tax rate
-# we use the current tax rate to calculate the tax amount
-# Finally, we can get the net pay after tax
+# Then, we need to calculate the tax amount using progressive tax brackets
+# Progressive tax means different portions of income are taxed at different rates
+# For example: first $15,600 at 10.5%, next portion at 17.5%, and so on
+# We loop through each tax bracket and calculate tax for the portion of income in that bracket
+# Finally, we subtract the total tax from gross pay to get the net pay after tax
 def calculate_gross_pay_after_tax(hours_worked, hourly_rate):
-    # Calculate the gross pay pre year
+    # Calculate the gross pay pre year (total income before tax)
     gross_pay_pre_year = hours_worked * hourly_rate
-    current_tax_rate = 0.0
-    # Loop through the tax rate dictionary to find the current tax rate
-    for tax_bracket in tax_rate.keys():
-        # If the gross pay pre year is in the current tax bracket, set the current tax rate
-        if gross_pay_pre_year > tax_bracket[0] and gross_pay_pre_year <= tax_bracket[1]:
-            # Attention: tax_rate is a dictionary, so we need to use a temporary variable to store the tax rate
-            current_tax_rate = tax_rate[tax_bracket]
+    
+    # Initialize total tax amount and previous threshold for progressive tax calculation
+    total_tax = 0.0
+    previous_threshold = 0
+    
+    # Sort tax brackets by minimum income to process from lowest to highest
+    # This ensures we calculate tax progressively: lower income portions first
+    sorted_brackets = sorted(tax_rate.items(), key=lambda x: x[0][0])
+    
+    # Loop through each tax bracket to calculate tax for the portion of income in that bracket
+    for (min_income, max_income), rate in sorted_brackets:
+        # If all income has been taxed, exit the loop
+        if gross_pay_pre_year <= previous_threshold:
             break
-    # Calculate the tax amount based on the tax rate and the gross pay pre year
-    tax_amount = gross_pay_pre_year * current_tax_rate / 100
-    # Calculate the net pay after tax
-    net_pay = gross_pay_pre_year - tax_amount
+        
+        # Calculate the taxable amount in this bracket
+        # It's the minimum of: (remaining income) or (income in this bracket)
+        # For example: if income is $68,640 and we're in bracket $53,501-$78,100,
+        # taxable amount = min($68,640, $78,100) - $53,500 = $15,140
+        taxable_amount = min(gross_pay_pre_year, max_income) - previous_threshold
+        
+        # Only calculate tax if there's taxable income in this bracket
+        if taxable_amount > 0:
+            # Calculate tax for this portion: taxable amount × rate / 100 (rate is percentage)
+            tax_in_bracket = taxable_amount * rate / 100
+            # Add this bracket's tax to the total tax
+            total_tax += tax_in_bracket
+        
+        # Update previous threshold to the end of current bracket for next iteration
+        previous_threshold = max_income
+    
+    # Calculate the net pay after tax: gross pay minus total tax
+    net_pay = gross_pay_pre_year - total_tax
     return net_pay
 
 if __name__ == "__main__":
