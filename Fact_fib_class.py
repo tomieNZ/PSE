@@ -8,7 +8,8 @@ class MathSeries:
         return n * MathSeries.factorial_recursive(n - 1)
 
     #generate the series
-    def series(self,n):
+    #@staticmethod
+    def series(n):
         #handle the edge cases
         if n < 0:
             raise ValueError("Series is not defined for negative numbers.")
@@ -44,6 +45,7 @@ if __name__ == "__main__":
     #print("Factorial (recursive):", MathSeries.factorial_recursive(n))
     #print("Fibonacci (recursive):", MathSeries.fibonacci_recursive(n))
     #instantiate the class
-    MathSeries = MathSeries()
+    obj = MathSeries()
+    print("Fibonacci (recursive):", obj.fibonacci_recursive(n))
     #print the series
-    print("Series (recursive):", MathSeries.series(n))
+    print("Series (recursive):", obj.series(n))
