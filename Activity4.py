@@ -11,7 +11,7 @@ class fibonacci:
         self.n = n
     #generate the Fibonacci series
     def series(self):
-        if self.n <-0:
+        if self.n <= 0:
             return []
         elif self.n == 1:
             return [0]
