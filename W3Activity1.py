@@ -42,7 +42,7 @@ class ReadFiles:
             print(f"Error reading file: {e}")
             return None
     
-    def count_asterisks(self):
+    def count_asterisks(self,character):
         """
         Count the number of '*' characters in the file.
         
@@ -59,9 +59,8 @@ class ReadFiles:
             
             # Count the '*' characters
             # the count is a built-in function in Python to count the number of occurrences of a substring in a string
-            asterisk_count = self.content.count('*')
-            
-            print(f"\nNumber of '*' characters in '{self.file_path}': {asterisk_count}")
+            asterisk_count = self.content.count(character)
+            print(f"\nNumber of {character} characters in '{self.file_path}': {asterisk_count}")
             return asterisk_count
         #handle the error if the file is not found
         except FileNotFoundError:
@@ -84,4 +83,4 @@ if __name__ == "__main__":
     read_files.read_and_output()
     
     # Count the number of '*' characters
-    read_files.count_asterisks()
+    read_files.count_asterisks('*')
