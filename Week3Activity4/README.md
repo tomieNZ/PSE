@@ -140,4 +140,4 @@ No external dependencies required.
 ## Author
 
 - **Author**: @tomiezhang
-- **GitHub**: [https://github.com/tomieNz](https://github.com/tomieN)
+- **GitHub**: [https://github.com/tomieNz](https://github.com/tomieNz)
