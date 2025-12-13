@@ -101,6 +101,10 @@ db.list_senior_patients()
 db.count_ophthalmologists()
 ```
 
+## Video of Record
+
+[![video](video.png)](https://customer-yba96prgaogr5aaa.cloudflarestream.com/6543c2f126fe9228c4be48e27267f9fb/watch)
+
 ## Requirements
 
 - Python 3.6+
