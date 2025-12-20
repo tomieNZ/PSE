@@ -58,8 +58,8 @@ class Cat(Animal):
     def speak(self):
         return f"{self.name} says Meow!"
 
-if __name__ == "__main__":
 
+def main():
     # create a dog instance
     dog = Dog("Buddy")
     # print the bite and speak method of the dog
@@ -68,8 +68,6 @@ if __name__ == "__main__":
     print(dog.speak())
 
     # create a corgi instance
-    # also call the parent class constructor
-    # it will trigger the Animal constructor to print "Animal Charlie is created!"
     corgi = Corgi("Charlie")
     # print the bite and speak method of the corgi
     print(corgi.bite())
@@ -77,13 +75,16 @@ if __name__ == "__main__":
     print(corgi.speak())
     # print the short legs method of the corgi
     print(corgi.short_legs())
-
     # create a cat instance
     cat = Cat("Whiskers")
     # print the speak method of the cat
     print(cat.speak())
-
     # create an animal instance
     animal = Animal("Animal")
     # print the speak method of the animal
     print(animal.speak())
+
+
+
+if __name__ == "__main__":
+    main()
