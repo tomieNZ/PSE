@@ -17,6 +17,7 @@ class JSONExporter(Exporter):
     def export(self, data: dict) -> str:
         if not data:
             return self.err_for_no_data
+            # creat json object from data with 2 indent
         return json.dumps(data,indent=2)
 
 class CSVExporter(Exporter):
@@ -25,6 +26,7 @@ class CSVExporter(Exporter):
         if not data:
             return self.err_for_no_data
         headers = ",".join(data[0].keys())
+        # loop rows and join the values with comma
         rows = [",".join(str(v) for v in row.values()) for row in data]
         return headers + "\n" + "\n".join(rows)
 
@@ -34,6 +36,7 @@ class XMLExporter(Exporter):
         if not data:
             return self.err_for_no_data
         xml_string = "<data>"
+        # loop rows and add row to xml string
         for row in data:
             xml_string += "<row>"
             for key, value in row.items():
