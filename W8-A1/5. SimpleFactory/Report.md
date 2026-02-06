@@ -18,8 +18,8 @@ This is the parent class. It defines two attributes: `first` and `last`.
 
 **2. Two subclasses — `FirstFirst` and `LastFirst`**
 
-- `FirstFirst`: handles names like `"Tom Zhang"` (separated by a space).
-- `LastFirst`: handles names like `"Zhang, Tom"` (separated by a comma).
+- `FirstFirst`: handles names like `"Tomie Zhang"` (separated by a space).
+- `LastFirst`: handles names like `"Zhang, Tomie"` (separated by a comma).
 
 Both classes extend `Namer` and split the name string in different ways.
 
@@ -55,7 +55,7 @@ It does not care whether the returned object is `FirstFirst` or `LastFirst`.
 
 ## Outcome of the Code
 
-- **Console version (`NamerConsole.py`)**: The user types a name in the terminal. The program splits it into first name and last name and prints the result. It works for both `"Tom Zhang"` and `"Zhang, Tom"`.
+- **Console version (`NamerConsole.py`)**: The user types a name in the terminal. The program splits it into first name and last name and prints the result. It works for both `"Tomie Zhang"` and `"Zhang, Tomie"`.
 - **GUI version (`NameUi.py`)**: Same logic but with a Tkinter window. The user enters a name, clicks "Compute", and the first/last names appear in separate fields.
 - **`Cocoon.py`**: Another small factory example. The `Cocoon` class returns either `TrigButterfly` or `AddButterfly` depending on whether the input value is zero or not.
 
