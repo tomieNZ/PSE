@@ -1,0 +1,38 @@
+Senior Python Developer - Auckland, New Zealand
+
+About the Role:
+We are looking for a Senior Python Developer to join our engineering team.
+You will be responsible for designing, developing, and maintaining scalable
+backend services and APIs.
+
+Requirements:
+- 5+ years of experience in Python development
+- Strong proficiency in Django or FastAPI frameworks
+- Experience with RESTful API design and implementation
+- Solid understanding of SQL databases (PostgreSQL preferred)
+- Experience with cloud services (AWS or Azure)
+- Familiarity with Docker and Kubernetes for containerized deployments
+- Knowledge of CI/CD pipelines (GitHub Actions, Jenkins)
+- Experience with unit testing and test-driven development (TDD)
+- Strong problem-solving and communication skills
+
+Nice to Have:
+- Experience with microservices architecture
+- Knowledge of message queues (RabbitMQ, Kafka)
+- Familiarity with NoSQL databases (MongoDB, Redis)
+- Experience with Agile/Scrum methodologies
+- Contributions to open-source projects
+
+Responsibilities:
+- Design and implement scalable backend services using Python
+- Write clean, maintainable, and well-documented code
+- Participate in code reviews and mentor junior developers
+- Collaborate with frontend and DevOps teams
+- Optimize application performance and database queries
+- Contribute to system architecture decisions
+
+Benefits:
+- Competitive salary ($120k - $160k NZD)
+- Flexible working arrangements (hybrid/remote)
+- Professional development budget
+- Health insurance
