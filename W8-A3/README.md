@@ -36,6 +36,7 @@ W8-A3/
 ├── .env.example         # API key template
 ├── Dockerfile           # Docker build config
 ├── .dockerignore        # Docker build exclusions
+├── start.sh             # One-click Docker launch script
 ├── docs/
 │   ├── Yaohui_AI.pdf    # Sample CV (PDF)
 │   └── sample_jd.txt    # Sample Job Description
@@ -127,17 +128,25 @@ python main.py
 
 ## Docker Deployment
 
-### Build
+### Quick Start (Recommended)
+
+One-click build & run:
 
 ```bash
-docker build -t cv-ats-agent .
+./start.sh
 ```
 
-### Run
+The script automatically checks `.env` and `docs/` exist, then builds the image and runs the analysis.
 
-Use `--env-file` to inject API keys and `-v` to mount your docs:
+### Manual Steps
+
+If you prefer to run Docker commands manually:
 
 ```bash
+# Build
+docker build -t cv-ats-agent .
+
+# Run (mount docs + inject env)
 docker run --rm --env-file .env -v $(pwd)/docs:/app/docs cv-ats-agent
 ```
 
