@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 32px;
+            width: 380px;
+            max-width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input[type="number"]:focus {
+            border-color: #888;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            border: 1px solid #ccc;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .bmi-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .bmi-category {
+            font-size: 16px;
+            color: #555;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="0.1" min="1"
+                       placeholder="e.g. 70" value="{{ weight if weight else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" step="0.1" min="1"
+                       placeholder="e.g. 170" value="{{ height if height else '' }}" required>
+            </div>
+            <button type="submit">Calculate BMI</button>
+        </form>
+
+        {% if bmi is not none %}
+        <div class="result">
+            <div class="bmi-value">{{ bmi }}</div>
+            <div class="bmi-category">{{ category }}</div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
