@@ -72,7 +72,7 @@ Both LLM nodes call `anthropic/claude-sonnet-4-5` through OpenRouter. The prompt
 **How the plan was generated:**
 Claude received a profile indicating a young underweight male with BMI 16.98. The diet plan focused on **high-calorie, protein-rich meals** (e.g. peanut butter, whole milk, eggs, legumes, lean meats) with 3 main meals and 2–3 calorie-dense snacks per day to support healthy weight gain. The exercise plan emphasised **progressive resistance/strength training** (3–4 days/week) with moderate cardio to build muscle mass safely without burning excess calories.
 
-![Scenario 1 – Young Underweight](screenshots/scenario1_underweight.png)
+![Scenario 1 – Young Underweight](1.png)
 
 ---
 
@@ -90,7 +90,7 @@ Claude received a profile indicating a young underweight male with BMI 16.98. Th
 **How the plan was generated:**
 Claude received a profile of an older overweight female with BMI 33.2. The diet plan focused on **low-calorie, nutrient-dense meals** with portion control (vegetables, lean protein, wholegrains, reduced refined carbs and sugar) to support gradual, sustainable weight loss. The exercise plan prioritised **low-impact cardio** (walking, swimming, cycling) and light resistance training to protect joints, improve cardiovascular health, and maintain muscle mass appropriate for her age.
 
-![Scenario 2 – Older Overweight](screenshots/scenario2_overweight.png)
+![Scenario 2 – Older Overweight](2.png)
 
 ---
 
