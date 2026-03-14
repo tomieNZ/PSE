@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}App{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #222;
+            display: flex;
+            gap: 0;
+        }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            display: block;
+        }
+
+        nav a:hover, nav a.active {
+            background: #444;
+            color: #fff;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 16px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 32px;
+            width: 480px;
+            max-width: 100%;
+        }
+
+        h1 {
+            color: #222;
+            margin-bottom: 24px;
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 13px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            outline: none;
+            background: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #888;
+        }
+
+        textarea { resize: vertical; min-height: 70px; }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        button[type="submit"]:hover { background: #555; }
+
+        .error { color: #900; font-size: 12px; margin-top: 3px; }
+
+        .alert {
+            padding: 10px 14px;
+            border: 1px solid #bbb;
+            background: #f0f0f0;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            border: 1px solid #ccc;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .bmi-value { font-size: 36px; font-weight: 700; color: #222; }
+        .bmi-category { font-size: 16px; color: #555; margin-top: 4px; }
+
+        .card-wide {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 32px;
+            width: 960px;
+            max-width: 100%;
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .plan-section {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .plan-section h2 {
+            font-size: 15px;
+            color: #222;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .plan-section .plan-body { font-size: 13px; color: #333; line-height: 1.7; }
+        .plan-body h1, .plan-body h2, .plan-body h3 { font-size: 14px; color: #222; margin: 12px 0 6px; }
+        .plan-body ul, .plan-body ol { margin-left: 18px; }
+        .plan-body li { margin-bottom: 3px; }
+        .plan-body p { margin-bottom: 8px; }
+        .plan-body strong { color: #111; }
+
+        .profile-bar {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #333;
+            display: flex;
+            gap: 24px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+
+        .profile-bar span { font-weight: 600; color: #111; }
+
+        .loading-msg {
+            text-align: center;
+            padding: 40px;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" {% if request.path == "/" %}class="active"{% endif %}>BMI Calculator</a>
+        <a href="/appointment/" {% if request.path == "/appointment/" %}class="active"{% endif %}>Book Appointment</a>
+        <a href="/plan/" {% if "/plan/" in request.path %}class="active"{% endif %}>Diet & Exercise Plan</a>
+    </nav>
+    <main>
+        {% block main %}
+        <div class="card">
+            {% block content %}{% endblock %}
+        </div>
+        {% endblock %}
+    </main>
+</body>
+</html>

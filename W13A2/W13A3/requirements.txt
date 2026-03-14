@@ -1,0 +1,6 @@
+django
+promptflow
+promptflow-tools
+openai
+python-dotenv
+markdown

@@ -1,0 +1,67 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+inputs:
+  weight:
+    type: double
+  height:
+    type: double
+  age:
+    type: int
+  gender:
+    type: string
+
+outputs:
+  bmi:
+    type: string
+    reference: ${parse_input.output.bmi}
+  category:
+    type: string
+    reference: ${parse_input.output.category}
+  diet_plan:
+    type: string
+    reference: ${combine_plans.output.diet_plan}
+  exercise_plan:
+    type: string
+    reference: ${combine_plans.output.exercise_plan}
+
+nodes:
+  - name: parse_input
+    type: python
+    source:
+      type: code
+      path: parse_input.py
+    inputs:
+      weight: ${inputs.weight}
+      height: ${inputs.height}
+      age: ${inputs.age}
+      gender: ${inputs.gender}
+
+  - name: generate_diet
+    type: python
+    source:
+      type: code
+      path: generate_diet.py
+    inputs:
+      bmi: ${parse_input.output.bmi}
+      category: ${parse_input.output.category}
+      age: ${inputs.age}
+      gender: ${inputs.gender}
+
+  - name: generate_exercise
+    type: python
+    source:
+      type: code
+      path: generate_exercise.py
+    inputs:
+      bmi: ${parse_input.output.bmi}
+      category: ${parse_input.output.category}
+      age: ${inputs.age}
+      gender: ${inputs.gender}
+
+  - name: combine_plans
+    type: python
+    source:
+      type: code
+      path: combine_plans.py
+    inputs:
+      diet_plan: ${generate_diet.output}
+      exercise_plan: ${generate_exercise.output}
